@@ -1177,10 +1177,10 @@ impl<'a, 'tcx> LateLintPass<'a, 'tcx> for InvalidNoMangleItems {
                     let msg = "const items should never be #[no_mangle]";
                     let mut err = cx.struct_span_lint(NO_MANGLE_CONST_ITEMS, it.span, msg);
                     // `const` is 5 chars
-                    let const_span = it.span.with_hi(BytePos(it.span.lo().0 + 5));
+                    let const_span = it.span.with_hi(BytePos(it.span.lo().1 + 5));
                     err.span_suggestion(const_span,
                                         "try a static value",
-                                        "pub static".to_owned());
+                                        "static".to_owned());
                     err.emit();
                 }
             }
